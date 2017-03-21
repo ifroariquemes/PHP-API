@@ -1,0 +1,24 @@
+<?php
+
+namespace PhpApi;
+
+trait ApiTrait
+{
+
+    protected $requestMethod;
+    protected $input;
+
+    public function __construct()
+    {
+        $this->requestMethod = $_SERVER['REQUEST_METHOD'];
+        $this->input = json_decode(file_get_contents('php://input'), true);
+    }
+
+    public function response($obj)
+    {
+        header('Content-Type: application/json');
+        echo json_encode($obj);
+    }
+
+}
+

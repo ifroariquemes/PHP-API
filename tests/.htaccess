@@ -1,0 +1,11 @@
+AddType application/x-httpd-php .php
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
+</IfModule>
+<Files "keys.json">
+Order Allow,Deny
+Deny from all
+</Files>

@@ -1,0 +1,57 @@
+<?php
+
+namespace PhpApi;
+
+/**
+ * This class implements a token resoruce. A file named 'keys.json' should
+ * host all token keys that will be accepted by the project.
+ * 
+ * {
+ *  "SystemName": "token_string_123456",
+ *  "AnotherSystem": "token_string_654321"
+ * }
+ * 
+ * @package PhpApi
+ * @copyright (c) 2017, Federal Institute of Rondonia
+ * @license http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @author Natanael Simoes <natanael.simoes@ifro.edu.br>
+ * @since Release 0.1.0
+ * @link https://github.com/ifroariquemes/PHP-API Github repository
+ */
+class Token
+{
+
+    use \FlorianWolters\Component\Util\Singleton\SingletonTrait;
+
+    /**
+     * The path to the token keys file (should be at project root)
+     */
+    const KEYS_PATH = './keys.json';
+
+    /**
+     * The header option that contains the API key
+     */
+    const KEY_INDEX = 'HTTP_X_API_KEY';
+
+    /**
+     * Checks if the keys.json contains the API key sent at HTTP header.
+     * If keys.json does not exists at project root, then token security
+     * will not be used.
+     * @return bool Authenticated successfully
+     */
+    public static function authenticate(): bool
+    {
+        if (file_exists(self::KEYS_PATH)) {
+            $keys = (array) json_decode(file_get_contents(self::KEYS_PATH));
+            $token = filter_input(INPUT_SERVER, self::KEY_INDEX);
+            if (!in_array($token, $keys)) {
+                http_response_code(401);
+                echo json_encode(['message' => 'Invalid token.']);
+                exit;
+            }
+        }
+        return true;
+    }
+
+}
+

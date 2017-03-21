@@ -1,0 +1,27 @@
+{
+    "name": "ifroariquemes/php-api",
+    "type": "library",
+    "description": "Create a API for your PHP project in minutes",
+    "keywords": ["php", "api", "routing"],
+    "homepage": "https://github.com/ifroariquemes/php-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Natanael Simões",
+            "email": "natanael.simoes@ifro.edu.br",
+            "homepage": "http://www.natanaelsimoes.com",
+            "role": "Professor"
+        }
+    ],
+    "require": {
+        "florianwolters/component-util-singleton": "v0.3.2",
+        "saxulum/saxulum-annotation-manager": "1.2.0",
+        "doctrine/common": "v2.7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpApi\\": "src/",
+            "PhpApiTests\\": "tests/src"
+        }
+    }
+}
