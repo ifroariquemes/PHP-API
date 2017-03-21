@@ -48,7 +48,7 @@ Add in your `composer.json`:
 ```
 or in your bash
 ```sh
-$ composer require natanaelsimoes/zeus-framework
+$ composer require ifroariquemes/php-api
 ```
 
 From any point, make available the following code to start:
